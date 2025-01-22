@@ -47,10 +47,11 @@ vector<vector<int>> readFile (string filee){
 }
 
 /*EL algoritmo de dijkstra para saber el camino más corto*/
-vector<int> dijkstra (vector<vector<int>> matrix, int start){
+vector<int> dijkstra (vector<vector<int>> matrix, int start, vector<int> & parent){
     int size= matrix.size();
     vector <int> distance( size, numeric_limits<int>::max());
     vector <bool> visit (size, false);
+    parent= vector <int> (size, -1);
 
     distance[start]= 0; 
 
@@ -75,6 +76,7 @@ vector<int> dijkstra (vector<vector<int>> matrix, int start){
                 int newDistance= distance[actual] + matrix [actual][a];
                 if(newDistance < distance[a]){
                     distance[a]= newDistance; 
+                    parent[a]= actual;
                 }
             }
         }
@@ -100,6 +102,7 @@ class Nodo{
 
 }; 
 
+/*
 vector<Nodo*> bfs(vector<vector<int>>matrix, int start, int final){
     int size= matrix.size();
     vector<bool> visit(size,false); 
@@ -128,9 +131,9 @@ vector<Nodo*> bfs(vector<vector<int>>matrix, int start, int final){
     }
 
     return nodo; 
-}
+}*/
 
-void shortestPath (vector <Nodo*> nodo, int final){
+void shortestPath (vecotr<int>& parent, int final){
     stack<char> path;
     /*int value= nodo[final]->value;*/
     int actual= final; 
@@ -138,7 +141,7 @@ void shortestPath (vector <Nodo*> nodo, int final){
     while(actual != -1){
         char nChar= 'A'+ actual; 
         path.push(nChar);
-        actual= nodo [actual]-> parent; 
+        actual= parent[actual]; 
 
     }
 
@@ -184,18 +187,20 @@ int main(){
     }
 
    /* vector <Nodo*> nodo = bfs(matrix, 0, find); */
-    vector<int> distance= dijkstra (matrix, 0);
+    vector <int> parent; 
+    vector<int> distance= dijkstra (matrix, 0, parent);
 
     if(distance [find]  == numeric_limits<int>::max()){
         cout << "No hay camino \n";
     }else{
         cout <<" La distancia es: " << distance [find] << endl; 
-        vector <Nodo*> nodo = bfs(matrix, 0, find); 
+        /*vector <Nodo*> nodo = bfs(matrix, 0, find); */
+        /*Hay que indicar el camino para llegar al nodo solicitado*/
         shortestPath(nodo,find);
         
     }
 
-    /*Hay que indicar el camino para llegar al nodo solicitado*/
+    
     
 
     return 0;
