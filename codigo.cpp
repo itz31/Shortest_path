@@ -5,6 +5,7 @@
 #include <limits>
 #include <cctype>
 #include <queue>
+#include <stack>
 
 
 using namespace std; 
@@ -130,7 +131,7 @@ vector<Nodo*> bfs(vector<vector<int>>matrix, int start, int final){
 }
 
 void shortestPath (vector <Nodo*> nodo, int final){
-    queue<char> path;
+    stack<char> path;
     /*int value= nodo[final]->value;*/
     int actual= final; 
 
@@ -144,7 +145,7 @@ void shortestPath (vector <Nodo*> nodo, int final){
     cout <<"El camino a seguir: ";
 
     while(!path.empty()){
-        cout << path.front();
+        cout << path.top();
         path.pop();
 
         if (!path.empty()){
