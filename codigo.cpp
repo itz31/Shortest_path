@@ -4,6 +4,7 @@
 #include <sstream>
 #include <limits>
 #include <cctype>
+#include <queue>
 
 
 using namespace std; 
@@ -82,6 +83,78 @@ vector<int> dijkstra (vector<vector<int>> matrix, int start){
 
 }
 
+/*Arbol con cosas de bfs*/
+
+class Nodo{
+    public: 
+    int letter; 
+    int value; 
+    int parent; 
+
+    Nodo(int l, int v, int p){
+        this -> letter= l; 
+        this-> value= v;
+        this -> parent= p; 
+    }
+
+}; 
+
+vector<Nodo*> bfs(vector<vector<int>>matrix, int start, int final){
+    int size= matrix.size();
+    vector<bool> visit(size,false); 
+    queue<int> queue; 
+    vector<Nodo*> nodo(size,nullptr); 
+
+    visit[start]= true;
+    queue.push(start);
+    nodo[start]= new Nodo(start, 0, -1);
+
+    while (!queue.empty()){
+        int actual= queue.front();
+        queue.pop();
+
+        if (actual == final) break; 
+
+        for( int i= 0; i < size; i++){
+            if(matrix[actual][i]> 0 && !visit [i]){
+                visit[i]= true;
+                queue.push(i);
+
+                int newValue= nodo[actual]-> value + matrix[actual][i];
+                nodo [i]= new Nodo(i,newValue,actual);
+            }
+        }
+    }
+
+    return nodo; 
+}
+
+void shortestPath (vector <Nodo*> nodo, int final){
+    queue<char> path;
+    /*int value= nodo[final]->value;*/
+    int actual= final; 
+
+    while(actual != -1){
+        char nChar= 'A'+ actual; 
+        path.push(nChar);
+        actual= nodo [actual]-> parent; 
+
+    }
+
+    cout <<"El camino a seguir: ";
+
+    while(!path.empty()){
+        cout << path.front();
+        path.pop();
+
+        if (!path.empty()){
+            cout << "->";
+        }
+    }
+
+    cout<< endl; 
+}
+
 int main(){
 
     string file= "texto.txt"; 
@@ -103,18 +176,26 @@ int main(){
 
     int find = input - 'A'; 
 
+    /*control de error*/
     if(find < 0 || find >= matrix.size()){
         cout <<"Nodo inválido \n";
         return 1; 
     }
 
+   /* vector <Nodo*> nodo = bfs(matrix, 0, find); */
     vector<int> distance= dijkstra (matrix, 0);
 
-    if(distance[find] == numeric_limits<int>::max()){
+    if(distance [find]  == numeric_limits<int>::max()){
         cout << "No hay camino \n";
     }else{
         cout <<" La distancia es: " << distance [find] << endl; 
+        vector <Nodo*> nodo = bfs(matrix, 0, find); 
+        shortestPath(nodo,find);
+        
     }
+
+    /*Hay que indicar el camino para llegar al nodo solicitado*/
+    
 
     return 0;
 }
