@@ -10,7 +10,7 @@
 
 using namespace std; 
 
-/*Vamos a leer el archivo para crear la matriz*/
+/*Vamos a leer el archivo para crear la matriz yipie*/
 vector<vector<int>> readFile (string filee){
     ifstream file(filee);
     if(!file){
@@ -46,7 +46,7 @@ vector<vector<int>> readFile (string filee){
     return matrix;
 }
 
-/*EL algoritmo de dijkstra para saber el camino más corto*/
+/*EL algoritmo de dijkstra pa saber el numerito del camino más corto jiji*/
 vector<int> dijkstra (vector<vector<int>> matrix, int start, vector<int> & parent){
     int size= matrix.size();
     vector <int> distance( size, numeric_limits<int>::max());
@@ -86,7 +86,7 @@ vector<int> dijkstra (vector<vector<int>> matrix, int start, vector<int> & paren
 
 }
 
-/*Arbol con cosas de bfs*/
+/*Arbol con cosas de bfs y esas csas que vimos al final pa la segunda prueba*/
 
 class Nodo{
     public: 
@@ -164,7 +164,7 @@ int main(){
     string file= "texto.txt"; 
     vector<vector<int>> matrix= readFile(file); 
 
-    /*imprimo la matriz que aparece en el txt*/
+    /*imprimo la matriz que aparece en el txt pa verificar*/
     for (const auto& row : matrix) {
         for (int n : row) {
             cout << n << " ";
@@ -172,7 +172,7 @@ int main(){
         cout << endl;
     }
 
-    /*Implemento la parte de letras y cosas de dijkstra*/
+    /*Implemento la parte de letras y cosas de dijkstra :v*/
     char input; 
     cout << "\n Ingrese el nodo al cual quiere llegar: ";
     cin >> input; 
@@ -195,14 +195,14 @@ int main(){
     }else{
         cout <<" La distancia es: " << distance [find] << endl; 
         /*vector <Nodo*> nodo = bfs(matrix, 0, find); */
-        /*Hay que indicar el camino para llegar al nodo solicitado*/
+        /*Hay que indicar el camino para llegar al nodo solicitado , llamo al sP*/
         shortestPath(parent,find);
         
     }
 
     
     
-
+    /* redii */
     return 0;
 }
 
