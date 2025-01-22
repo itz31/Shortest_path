@@ -42,8 +42,8 @@ int main(){
     vector<vector<int>> matrix= readFile(file); 
 
     for (const auto& row : matrix) {
-        for (int val : row) {
-            cout << val << " ";
+        for (int n : row) {
+            cout << n << " ";
         }
         cout << endl;
     }
