@@ -133,7 +133,7 @@ vector<Nodo*> bfs(vector<vector<int>>matrix, int start, int final){
     return nodo; 
 }*/
 
-void shortestPath (vecotr<int>& parent, int final){
+void shortestPath (vector<int>& parent, int final){
     stack<char> path;
     /*int value= nodo[final]->value;*/
     int actual= final; 
@@ -196,7 +196,7 @@ int main(){
         cout <<" La distancia es: " << distance [find] << endl; 
         /*vector <Nodo*> nodo = bfs(matrix, 0, find); */
         /*Hay que indicar el camino para llegar al nodo solicitado*/
-        shortestPath(nodo,find);
+        shortestPath(parent,find);
         
     }
 
